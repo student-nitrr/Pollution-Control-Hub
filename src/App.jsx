@@ -288,8 +288,10 @@ export default function App() {
 
   return (
     <main className="app-shell">
-      <Hero cityName={position.cityName} />
+      {/* Moving the Navigation Buttons here positions them above the Hero Banner */}
       <SectionNav activeSection={activeSection} onSectionChange={setActiveSection} theme={theme} onToggleTheme={toggleTheme} />
+      
+      <Hero cityName={position.cityName} />
 
       {activeSection === 'home' && (
         <AppControls
