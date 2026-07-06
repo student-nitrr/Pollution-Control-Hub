@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'pollution-community-reports';
+const VOTES_STORAGE_KEY = 'pollution-community-votes';
 const VOTE_THRESHOLD = 5; 
 const X_DAYS = 7;
 const MAX_IMAGE_SIZE_BYTES = 500 * 1024; // 500 KB
@@ -101,7 +102,11 @@ export default function CommunityHub() {
   }, [reports]);
 
   useEffect(() => {
-    localStorage.setItem(VOTES_STORAGE_KEY, JSON.stringify([...votedIds]));
+    try {
+      localStorage.setItem(VOTES_STORAGE_KEY, JSON.stringify([...votedIds]));
+    } catch (e) {
+      console.error('Failed to persist community votes to localStorage:', e);
+    }
   }, [votedIds]);
 
   const onSubmit = (event) => {
